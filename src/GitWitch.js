@@ -1,4 +1,3 @@
-//const parser = require('./QuestionParser');
 class Gitwitch {
   constructor({parser, runner, formatter}) {
     this.parser = parser;
@@ -8,10 +7,11 @@ class Gitwitch {
 
   process(input) {
     return new Promise(resolve => {
-      this.parser.parse(input);
-      this.runner.run('command');
-      this.formatter.format('response');
-      resolve('output');
+      let command = this.parser.parse(input);
+      let response = this.runner.run(command).then(result => {
+        this.formatter.format(result)
+        resolve();
+      })
     })
   }
 }

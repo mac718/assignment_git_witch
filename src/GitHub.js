@@ -1,8 +1,8 @@
-const oktokit = require('@octokit/rest')();
+const octokit = require('@octokit/rest')();
 
 const GitHub = {
   pullData: (commandHash) => {
-    return {}
+    return octokit.repos.listForUser({username: commandHash.username}) 
   }
 }
 

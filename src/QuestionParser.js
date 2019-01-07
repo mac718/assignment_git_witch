@@ -6,7 +6,6 @@ class QuestionParser {
 
     let splitInput = input.toLowerCase().split(' ');
 
-    console.log(splitInput);
     
     if(splitInput[0] == 'what') {
       query = 'details';
@@ -21,9 +20,9 @@ class QuestionParser {
     };
 
     return {
-      'username': /(?<=does\s)\w+/.exec(input)[0],
-      'subject': subject,
-      'query': query
+      username: /(?<=does\s)\w+/.exec(input)[0],
+      subject: subject,
+      query: query
     };
   }
 }
