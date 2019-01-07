@@ -12,12 +12,19 @@ class CommandRunner {
         query: command.query,
       };
       this.infoGrabber.pullData(command).then(result => {
-        if(response.query == 'count'){
+        if(response.query == 'count' && response.subject == 'repos'){
           response.results = result.data.length;
-        } else {
+        } else if(response.query == 'details' && response.subject == 'repos') {
           response.results = JSON.stringify(result.data);
+        } else if(response.query == 'details' && response.subject == 'starred repos') {
+          response.results = result.data.filter(repo => {
+            return repo.stargazers_count > 0;
+          });
+        } else {
+          response.results = result.data.filter(repo => {
+            return repo.stargazers_count > 0;
+          }).length;
         }
-        
         resolve(response);
       })
     })
