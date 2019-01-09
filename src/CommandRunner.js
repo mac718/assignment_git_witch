@@ -4,14 +4,14 @@ class CommandRunner {
   constructor(infoGrabber = gitHub){
     this.infoGrabber = infoGrabber;
   }
-  run(command) {
+  run(username, subject, query) {
     return new Promise((resolve, reject) => {
       let response = {
-        username: command.username,
-        subject: command.subject,
-        query: command.query,
+        username: username,
+        subject: subject,
+        query: query,
       };
-      this.infoGrabber.pullData(command).then(result => {
+      this.infoGrabber.pullData(response).then(result => {
         if(response.query == 'count' && response.subject == 'repos'){
           response.results = result.data.length;
         } else if(response.query == 'details' && response.subject == 'repos') {
