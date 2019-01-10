@@ -10,7 +10,8 @@ describe("CommandRunner", () => {
       let response = {};
 
       response.results = [{name: 'Code-Coven', description: 'A version control system for weird sisters'}];
-      return Promise.resolve(response);
+      //return Promise.resolve(response);
+      return response;
       // if(command == 'details'){
       //   return `${response[0].name} - ${response[0].description}`
       // } else {
@@ -23,9 +24,13 @@ describe("CommandRunner", () => {
   
 
   it("returns a 'count' response object for count queries", () => {
-    this.query = 'count';
+    //this.query = 'count';
     this.runner.run(this.username, this.subject, this.countQuery).then(result => {
-      expect(result.results).toBe(1);
+      console.log(result);
+      result.then(data => {
+
+        expect(data.results).length.toBe(1);
+      })
     })
   })
  
