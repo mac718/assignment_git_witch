@@ -13,6 +13,7 @@ class CommandRunner {
       };
       this.infoGrabber.pullData(response).then(result => {
         if(response.query == 'count' && response.subject == 'repos'){
+          console.log('hello')
           response.results = result.data.length;
         } else if(response.query == 'details' && response.subject == 'repos') {
           response.results = result.data;

@@ -6,37 +6,41 @@ describe("CommandRunner", () => {
     this.subject = 'repos';
     this.countQuery = 'count';
     this.detailsQuery = 'details';
-    this.gitHub = { pullData() {
-      let response = {};
-
-      response.results = [{name: 'Code-Coven', description: 'A version control system for weird sisters'}];
-      //return Promise.resolve(response);
-      return response;
-      // if(command == 'details'){
-      //   return `${response[0].name} - ${response[0].description}`
-      // } else {
-      //   return response.length;
-      // }
-    }};
-
-    this.runner = new CommandRunner(this.gitHub)
   })
   
 
-  it("returns a 'count' response object for count queries", () => {
-    //this.query = 'count';
-    this.runner.run(this.username, this.subject, this.countQuery).then(result => {
-      console.log(result);
-      result.then(data => {
+  it("returns a number for 'count' queries", () => {
+    let gitHub = { pullData(response = {}) {
+      response.query = 'count';
+      response.subject = 'repos';
 
-        expect(data.results).length.toBe(1);
-      })
+
+      response.data = [{name: 'Code-Coven', description: 'A version control system for weird sisters'}];
+
+      return Promise.resolve(response);
+    }};
+
+    this.runner = new CommandRunner(gitHub)
+
+    this.runner.run(this.username, this.subject, this.countQuery).then(result => {
+      expect(result.results).toBe(1)
     })
   })
  
-  it("returns a 'details' response object for details queries", () => {
+  it("returns an object for 'details' queries", () => {
+    let gitHub = { pullData(response = {}) {
+      response.query = 'details';
+      response.subject = 'repos';
+
+
+      response.data = [{name: 'Code-Coven', description: 'A version control system for weird sisters'}];
+
+      return Promise.resolve(response);
+    }};
+
+    this.runner = new CommandRunner(gitHub)
     this.runner.run(this.username, this.subject, this.detailsQuery).then(result => {
-      expect(result.results).toBe("Code-Coven - A version control system for weird sisters");
+      expect(typeof(result.results)).toBe('object');
     })
   })
 })
