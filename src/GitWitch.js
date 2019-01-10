@@ -8,10 +8,9 @@ class Gitwitch {
   process(input) {
     return new Promise(resolve => {
       let command = this.parser.parse(input);
-      //console.log(command);
-      let response = this.runner.run(command.username, command.subject, command.query).then(result => {
-        this.formatter.format(result)
-        resolve();
+      
+      let response = this.runner.run(command).then(result => {
+        resolve(this.formatter.format(result));
       })
     })
   }

@@ -12,7 +12,9 @@ const commObj = {
 }
 
 const witch = new gitWitch(commObj)
-witch.process(input);
+witch.process(input).then(output => {
+  console.log(output);
+})
 // .then(result => {
 //   console.log(result);
 // });
