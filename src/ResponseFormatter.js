@@ -9,8 +9,9 @@ class ResponseFormatter {
       output = `${response.username}'s ${response.subject}`
       console.log(output);
       response.results.forEach(repo => {
-        return `${repo.name} - ${repo.description}`;
+        output += `\n${repo.name} - ${repo.description}`;
       })
+      return output;
     }
     
   }

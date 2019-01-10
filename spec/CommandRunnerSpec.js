@@ -4,8 +4,6 @@ describe("CommandRunner", () => {
   beforeEach(() => {
     this.username = 'Griselda';
     this.subject = 'repos';
-    this.countQuery = 'count';
-    this.detailsQuery = 'details';
   })
   
 
